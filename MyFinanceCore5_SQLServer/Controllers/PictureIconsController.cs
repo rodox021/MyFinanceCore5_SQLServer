@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyFinanceCore5_SQLServer.Data;
 using MyFinanceCore5_SQLServer.Models.Entity;
+using MyFinanceCore5_SQLServer.Services.Interfaces;
 
 namespace MyFinanceCore5_SQLServer.Controllers
 {
     public class PictureIconsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IPictureIconsService _pictureIconsService;
 
-        public PictureIconsController(AppDbContext context)
+        public PictureIconsController(AppDbContext context, IPictureIconsService pictureIconsService)
         {
             _context = context;
+            _pictureIconsService = pictureIconsService;
         }
 
         // GET: PictureIcons
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PictureIcons.ToListAsync());
+            //return View(await _context.PictureIcons.ToListAsync());
+            return View(await _pictureIconsService.GetAllAsync());
         }
 
         // GET: PictureIcons/Details/5
@@ -33,8 +37,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
                 return NotFound();
             }
 
-            var pictureIcon = await _context.PictureIcons
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pictureIcon = await _pictureIconsService.GetByIdAsync(id.Value);  // _context.PictureIcons .FirstOrDefaultAsync(m => m.Id == id);
             if (pictureIcon == null)
             {
                 return NotFound();
@@ -58,8 +61,9 @@ namespace MyFinanceCore5_SQLServer.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pictureIcon);
-                await _context.SaveChangesAsync();
+                //_context.Add(pictureIcon);
+                //await _context.SaveChangesAsync();
+               await _pictureIconsService.AddAsync(pictureIcon);
                 return RedirectToAction(nameof(Index));
             }
             return View(pictureIcon);
@@ -73,7 +77,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
                 return NotFound();
             }
 
-            var pictureIcon = await _context.PictureIcons.FindAsync(id);
+            var pictureIcon = await _pictureIconsService.GetByIdAsync(id.Value); //_context.PictureIcons.FindAsync(id);
             if (pictureIcon == null)
             {
                 return NotFound();

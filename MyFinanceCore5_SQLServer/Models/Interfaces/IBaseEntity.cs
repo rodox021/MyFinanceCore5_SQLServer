@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyFinanceCore5_SQLServer.Models.Interfaces
 {
-    interface IBaseEntity
+    public interface IBaseEntity
     {
         int Id { get; set; }
     }

@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyFinanceCore5_SQLServer.Data;
+using MyFinanceCore5_SQLServer.Services;
+using MyFinanceCore5_SQLServer.Services.Interfaces;
 
 namespace MyFinanceCore5_SQLServer
 {
@@ -29,7 +31,11 @@ namespace MyFinanceCore5_SQLServer
 
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
+
+            services.AddScoped<IPictureIconsService, PictureIconsService>();
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
