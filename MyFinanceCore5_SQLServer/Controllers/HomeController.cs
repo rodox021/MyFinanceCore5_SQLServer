@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MyFinanceCore5_SQLServer.Models;
+using MyFinanceCore5_SQLServer.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
