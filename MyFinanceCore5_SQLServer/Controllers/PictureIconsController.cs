@@ -53,8 +53,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
         }
 
         // POST: PictureIcons/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,IconClass")] PictureIcon pictureIcon)
@@ -74,20 +73,18 @@ namespace MyFinanceCore5_SQLServer.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
 
             var pictureIcon = await _pictureIconsService.GetByIdAsync(id.Value); //_context.PictureIcons.FindAsync(id);
             if (pictureIcon == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
             return View(pictureIcon);
         }
 
         // POST: PictureIcons/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IconClass")] PictureIcon pictureIcon)
@@ -101,8 +98,9 @@ namespace MyFinanceCore5_SQLServer.Controllers
             {
                 try
                 {
-                    _context.Update(pictureIcon);
-                    await _context.SaveChangesAsync();
+                    //_context.Update(pictureIcon);
+                    //await _context.SaveChangesAsync();
+                    await _pictureIconsService.UpdateAsync(id, pictureIcon);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -128,8 +126,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
                 return NotFound();
             }
 
-            var pictureIcon = await _context.PictureIcons
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pictureIcon = await _pictureIconsService.GetByIdAsync(id.Value); //_context.PictureIcons.FirstOrDefaultAsync(m => m.Id == id);
             if (pictureIcon == null)
             {
                 return NotFound();
