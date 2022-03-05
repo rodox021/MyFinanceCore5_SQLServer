@@ -3,10 +3,24 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyFinanceCore5_SQLServer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "PictureIcons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IconClass = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PictureIcons", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Profiles",
                 columns: table => new
@@ -21,16 +35,16 @@ namespace MyFinanceCore5_SQLServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TypeFixedBill",
+                name: "TypeFixedBills",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TypeFixedBill", x => x.Id);
+                    table.PrimaryKey("PK_TypeFixedBills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,11 +66,18 @@ namespace MyFinanceCore5_SQLServer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FlagCard = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    FlagCard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureIconId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TypePayments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TypePayments_PictureIcons_PictureIconId",
+                        column: x => x.PictureIconId,
+                        principalTable: "PictureIcons",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,9 +140,9 @@ namespace MyFinanceCore5_SQLServer.Migrations
                 {
                     table.PrimaryKey("PK_FixedBill", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FixedBill_TypeFixedBill_TypeFixedBillId",
+                        name: "FK_FixedBill_TypeFixedBills_TypeFixedBillId",
                         column: x => x.TypeFixedBillId,
-                        principalTable: "TypeFixedBill",
+                        principalTable: "TypeFixedBills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -186,7 +207,7 @@ namespace MyFinanceCore5_SQLServer.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -330,6 +351,11 @@ namespace MyFinanceCore5_SQLServer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TypePayments_PictureIconId",
+                table: "TypePayments",
+                column: "PictureIconId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_ProfileId",
                 table: "Users",
                 column: "ProfileId");
@@ -347,7 +373,7 @@ namespace MyFinanceCore5_SQLServer.Migrations
                 name: "InstallmentTypeInputs");
 
             migrationBuilder.DropTable(
-                name: "TypeFixedBill");
+                name: "TypeFixedBills");
 
             migrationBuilder.DropTable(
                 name: "Shops");
@@ -369,6 +395,9 @@ namespace MyFinanceCore5_SQLServer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "PictureIcons");
 
             migrationBuilder.DropTable(
                 name: "Profiles");

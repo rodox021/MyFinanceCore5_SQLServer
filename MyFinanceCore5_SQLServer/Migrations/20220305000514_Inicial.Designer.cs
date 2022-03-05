@@ -10,8 +10,8 @@ using MyFinanceCore5_SQLServer.Data;
 namespace MyFinanceCore5_SQLServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220303023951_createIcon")]
-    partial class createIcon
+    [Migration("20220305000514_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -258,11 +258,12 @@ namespace MyFinanceCore5_SQLServer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeFixedBill");
+                    b.ToTable("TypeFixedBills");
                 });
 
             modelBuilder.Entity("MyFinanceCore5_SQLServer.Models.Entity.TypeInput", b =>

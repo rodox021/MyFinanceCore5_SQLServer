@@ -256,11 +256,12 @@ namespace MyFinanceCore5_SQLServer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeFixedBill");
+                    b.ToTable("TypeFixedBills");
                 });
 
             modelBuilder.Entity("MyFinanceCore5_SQLServer.Models.Entity.TypeInput", b =>

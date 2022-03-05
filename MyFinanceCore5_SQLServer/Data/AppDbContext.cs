@@ -25,6 +25,7 @@ namespace MyFinanceCore5_SQLServer.Data
         public DbSet<TypeInput> TypeInputs{ get; set; }
         public DbSet<InstallmentTypeInput> InstallmentTypeInputs { get; set; }
         public DbSet<TypePayment> TypePayments { get; set; }
+        public DbSet<TypeFixedBill> TypeFixedBills { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<InstallmentBuy> InstallmentBuys { get; set; }

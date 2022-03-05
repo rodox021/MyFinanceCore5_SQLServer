@@ -33,6 +33,7 @@ namespace MyFinanceCore5_SQLServer
                     options.UseSqlServer(Configuration.GetConnectionString("AppDbContext")));
 
             services.AddScoped<IPictureIconsService, PictureIconsService>();
+            services.AddScoped<ITypeFixedBillsService, TypeFixedBillsService>();
         }
 
         

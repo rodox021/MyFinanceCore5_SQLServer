@@ -12,7 +12,7 @@ namespace MyFinanceCore5_SQLServer.Data
     {
         public static void Seed(IApplicationBuilder applicationsBuilder)
         {
-            using(var serviceScope = applicationsBuilder.ApplicationServices.CreateScope())
+            using (var serviceScope = applicationsBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
 
@@ -32,9 +32,25 @@ namespace MyFinanceCore5_SQLServer.Data
                      new PictureIcon("CASH", "far fa-money-bill-alt"),
                      new PictureIcon("PayPal", "fab fa-paypal"),
                      new PictureIcon("DEFAULT", "far fa-credit-card")
-                });
+                     });
                     context.SaveChanges();
                 }
+
+                if (!context.TypeFixedBills.Any())
+                {
+                    context.TypeFixedBills.AddRange(new List<TypeFixedBill>()
+                    {
+                        new TypeFixedBill("Luz"),
+                        new TypeFixedBill("Internet"),
+                        new TypeFixedBill("Celular"),
+                        new TypeFixedBill("Educação"),
+                        new TypeFixedBill("Lazer")
+
+
+                    });
+                    context.SaveChanges();
+                }
+
             }
         }
     }

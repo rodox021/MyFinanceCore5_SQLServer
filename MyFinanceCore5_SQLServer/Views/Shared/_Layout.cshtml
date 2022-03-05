@@ -33,16 +33,58 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuração</a>
                             <div class="dropdown-menu">
+                                <a asp-controller="TypeFixedBills" asp-action="Index" class="dropdown-item">Tipo de Conta Fixa</a>
                                 <a asp-controller="PictureIcons" asp-action="Index" class="dropdown-item">Icon</a>
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="#">Sub >></a>
-
-
+                                <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuração</a>
+                                <div class="dropdown-menu">
+                                    <a asp-controller="TypeFixedBills" asp-action="Index" class="dropdown-item">Tipo de Conta Fixa</a>
+                                    <a asp-controller="PictureIcons" asp-action="Index" class="dropdown-item">Icon</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                                <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
+
+                        @*---------------------------*@
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="nav-item dropdown drop-down2">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown
+                                    </a>
+                                    <div class="dropdown-menu sub-menu2" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="nav-item dropdown  drop-down3">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Dropdown
+                                            </a>
+                                            <div class="dropdown-menu sub-menu2" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
                     <form class="form-inline d-md-inline-flex my-2 my-lg-0" style="padding-right: 5px" asp-controller="Movies" asp-action="Filter">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." />
@@ -68,4 +110,30 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
+
+
+
+@section Scripts{
+
+    <script>
+
+        $(".dropdown-menu a.dropdown-toggle").on('click', function () {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents(".dropdown-menu").first().find(".show").removeClass("show");
+            }
+
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass("show");
+
+
+            $(this).parents("li.nav-item.dropdown.show").on('hidden.bs.dropdown', function (e) {
+                $(".dropdown-submenu .show").removeClass("show");
+            });
+
+            return false;
+        });
+    </script>
+}
+}
