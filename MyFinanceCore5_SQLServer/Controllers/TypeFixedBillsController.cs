@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyFinanceCore5_SQLServer.Models.Entity;
+using MyFinanceCore5_SQLServer.Models.ViewModels;
+using MyFinanceCore5_SQLServer.Services.Exception;
 using MyFinanceCore5_SQLServer.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,9 +34,19 @@ namespace MyFinanceCore5_SQLServer.Controllers
 
 
         //------------------------------Details----------------------------------------------
-        public IActionResult Details(int?id)
+        public async Task<IActionResult> Details(int?id)
         {
-            return View();
+            if (id == null)
+            {
+                RedirectToAction(nameof(Error), new { msg = "Id é nulo !" });
+            }
+            var obj = await _typeFixedBillsService.GetByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { msg = "Não foi encontrado nenhum tipo de pagamento" });
+            }
+
+            return View(obj);
         }
 
 
@@ -49,9 +63,14 @@ namespace MyFinanceCore5_SQLServer.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TypeFixedBill obj)
+        public async Task<IActionResult> Create(TypeFixedBill obj)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                await _typeFixedBillsService.AddAsync(obj);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(obj);
         }
 
 
@@ -61,16 +80,59 @@ namespace MyFinanceCore5_SQLServer.Controllers
 
 
         //------------------------------Edit----------------------------------------------
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+
+            if (id == null)
+            {
+                RedirectToAction(nameof(Error), new { msg = "Id é nulo !" });
+            }
+            var obj = await _typeFixedBillsService.GetByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { msg = "Não foi encontrado nenhum tipo de pagamento" });
+            }
+
+            return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, TypeFixedBill obj)
+        public async Task<IActionResult> Edit(int id, TypeFixedBill obj)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(obj);
+            }
+            if (id != obj.Id)
+            {
+                return RedirectToAction(nameof(Error), new
+                {
+                    msg = "Id de usuário não correspondente"
+                }); ;
+            }
+
+            try
+            {
+                await _typeFixedBillsService.UpdateAsync(id, obj);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+
+                return RedirectToAction(nameof(Error), new
+                {
+                    msg = e.Message
+                }); ;
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction(nameof(Error), new
+                {
+                    msg = e.Message
+                }); ;
+            }
         }
 
 
@@ -78,16 +140,46 @@ namespace MyFinanceCore5_SQLServer.Controllers
 
 
         //------------------------------Delete----------------------------------------------
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            return View();
+
+            if (id == null)
+            {
+                RedirectToAction(nameof(Error), new { msg = "Id é nulo !" });
+            }
+            var obj = await _typeFixedBillsService.GetByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { msg = "Não foi encontrado nenhum tipo de pagamento" });
+            }
+
+            return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id) // confirmação do delete
+        public async Task<IActionResult> Delete(int id) // confirmação do delete
         {
-            return View();
+            try
+            {
+                await _typeFixedBillsService.DeleteAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction(nameof(Error), new
+                {
+                    msg = "Não pode ser Excluído - " + e.Message
+                });
+            }
+            
         }
+
+
+
+
+        //------------------------------Delete----------------------------------------------
+        
     }
 }

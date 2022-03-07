@@ -51,6 +51,19 @@ namespace MyFinanceCore5_SQLServer.Data
                     context.SaveChanges();
                 }
 
+                if (!context.TypePayments.Any())
+                {
+                    context.TypePayments.AddRange(new List<TypePayment>()
+                    {
+                        new TypePayment("Itau Platinun",1 ),
+                        new TypePayment("Itau VISA",2 ),
+                        new TypePayment("Sansung Card",2 ),
+                        new TypePayment("NuBank",1 )
+
+
+                    });
+                    context.SaveChanges();
+                }
             }
         }
     }

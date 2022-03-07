@@ -37,13 +37,13 @@ namespace MyFinanceCore5_SQLServer.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { msg = "Id é nulo !" }); //return NotFound();
             }
 
             var pictureIcon = await _pictureIconsService.GetByIdAsync(id.Value);  // _context.PictureIcons .FirstOrDefaultAsync(m => m.Id == id);
             if (pictureIcon == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { msg = "Id é nulo !" }); //return NotFound();
             }
 
             return View(pictureIcon);
@@ -85,7 +85,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
                 return RedirectToAction(nameof(Error), new
                 {
                     msg = "Id de usuário não encontrato ou já foi deletado"
-                }); ;
+                });
             }
             return View(pictureIcon);
         }

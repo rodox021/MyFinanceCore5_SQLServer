@@ -34,6 +34,7 @@ namespace MyFinanceCore5_SQLServer
 
             services.AddScoped<IPictureIconsService, PictureIconsService>();
             services.AddScoped<ITypeFixedBillsService, TypeFixedBillsService>();
+            services.AddScoped<ITypePaymentsService, TypePaymentsService>();
         }
 
         

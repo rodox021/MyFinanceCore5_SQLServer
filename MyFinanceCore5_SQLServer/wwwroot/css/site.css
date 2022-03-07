@@ -3,28 +3,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.my-gradiente {
-    background: #5433FF; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #A5FECB, #20BDFF, #5433FF); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, var(--primary), var(--secondary),var(--success)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-
-.drop-down2 {
-    position: relative;
-}
-
-    .drop-down2 .dropdown-toggle {
-        color: #000 !important;
-        padding: .25rem 1.5rem !important;
-    }
-
-    .drop-down2 .sub-menu2 {
-        position: absolute;
-        top: 0;
-        left: 100%;
-    }
-
 
 /*-------------------*/
 * {

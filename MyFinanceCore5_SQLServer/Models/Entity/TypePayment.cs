@@ -12,7 +12,25 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
     {
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="Campo {0} obrogatório")]
+        [Display(Name ="Nome")]
         public string FlagCard { get; set; }
+
+        public TypePayment()
+        {
+        }
+
+        public TypePayment( string flagCard, int pictureIconId)
+        {
+           
+            FlagCard = flagCard;
+            PictureIconId = pictureIconId;
+        }
+
+
+
+
 
 
         //Relationship

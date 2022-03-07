@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace MyFinanceCore5_SQLServer.Services.Exception
 {
-    public class DbConcurrencyException : ApplicationException
+    public class DbConcurrencyExceptionService : ApplicationException
     {
-        public DbConcurrencyException(string message) : base(message)
+        public DbConcurrencyExceptionService(string message) : base(message)
         {
         }
     }
