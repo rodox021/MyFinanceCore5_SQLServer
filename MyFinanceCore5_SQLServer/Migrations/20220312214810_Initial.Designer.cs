@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyFinanceCore5_SQLServer.Data;
 
 namespace MyFinanceCore5_SQLServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220312214810_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,14 +305,9 @@ namespace MyFinanceCore5_SQLServer.Migrations
                     b.Property<int>("PictureIconId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PictureIconId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("TypePayments");
                 });
@@ -322,9 +319,6 @@ namespace MyFinanceCore5_SQLServer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("CreatAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
@@ -334,6 +328,9 @@ namespace MyFinanceCore5_SQLServer.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("MyProperty")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -504,15 +501,7 @@ namespace MyFinanceCore5_SQLServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyFinanceCore5_SQLServer.Models.Entity.User", "User")
-                        .WithMany("TypePayments")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("PictureIcon");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyFinanceCore5_SQLServer.Models.Entity.User", b =>
@@ -577,8 +566,6 @@ namespace MyFinanceCore5_SQLServer.Migrations
                     b.Navigation("TypeFixedBills");
 
                     b.Navigation("TypeInputs");
-
-                    b.Navigation("TypePayments");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,5 +16,10 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         //TypeInput
         public List<Input> Inputs { get; set; }
 
+
+        //Relationship
+
+        public int UserID { get; set; }
+        public User User { get; set; }
     }
 }

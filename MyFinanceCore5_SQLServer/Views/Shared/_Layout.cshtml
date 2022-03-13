@@ -51,19 +51,23 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 ">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container-fluid">
-            &copy; 2022 - MyFinanceCore5_SQLServer - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="border-top footer text-muted container-fluid"s>
+       
+            @Html.Partial("_Footer")
+
+            @*&copy; 2022 - Rodolfo Leal Braga - Denvolvido com Am<i class="fa fa-heart text-danger"></i>r
+            <div><a class="btn text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contato</a></div>*@
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/myScript.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20220312214810_Initial.cs" />
+    <Compile Include="Migrations\20220312214810_Initial.Designer.cs" />
+    <Compile Include="Migrations\20220312215739_UpdateUserid_TypePayment.cs" />
+    <Compile Include="Migrations\20220312215739_UpdateUserid_TypePayment.Designer.cs" />
+    <Compile Include="Migrations\20220313164558_upadate_user.cs" />
+    <Compile Include="Migrations\20220313164558_upadate_user.Designer.cs" />
+    <Compile Include="Migrations\AppDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Models\Enums\" />
   </ItemGroup>
 

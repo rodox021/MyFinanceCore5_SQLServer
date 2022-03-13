@@ -9,5 +9,7 @@ namespace MyFinanceCore5_SQLServer.Services.Interfaces
 {
     public interface ITypePaymentsService : IBaseRepository<TypePayment>
     {
+        Task<IEnumerable<TypePayment>> GetAllWthPictureAsync();
+        Task<TypePayment> GetByIdWithPictureAsync(int id);
     }
 }

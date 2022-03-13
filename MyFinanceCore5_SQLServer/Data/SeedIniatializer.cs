@@ -20,7 +20,57 @@ namespace MyFinanceCore5_SQLServer.Data
                 context.Database.EnsureCreated();
 
 
-                //Icon
+
+
+                //Profile ------------------------------------
+                if (!context.Profiles.Any())
+                {
+                    context.Profiles.AddRange(new List<Profile>()
+                    {
+                        new Profile()
+                        {
+                            Name = "Manager"
+                        },
+                         new Profile()
+                        {
+                            Name = "Admin"
+                        },
+                          new Profile()
+                        {
+                            Name = "User"
+                        }
+                    });
+                    context.SaveChanges();
+                }
+
+
+                //User ------------------------------------
+                if (!context.Users.Any())
+                {
+                    context.Users.AddRange(new List<User>() {
+
+                        new User()
+                        {
+                            Name = "Admin",
+                            Email = "admin@admin.com",
+                            Password = "admin",
+                            IsActive = true,
+                            CreatAt = DateTime.Now,
+                            ProfileId = 1
+                        },
+                         new User()
+                        {
+                            Name = "Usuario",
+                            Email = "usuario@usuario.com",
+                            Password = "usuario",
+                            IsActive = true,
+                            CreatAt = DateTime.Now,
+                            ProfileId = 3
+                        }
+                    });
+                    context.SaveChanges();
+                }
+                //Icon ------------------------------------
                 if (!context.PictureIcons.Any())
                 {
                     context.PictureIcons.AddRange(new List<PictureIcon>()
@@ -36,29 +86,32 @@ namespace MyFinanceCore5_SQLServer.Data
                     context.SaveChanges();
                 }
 
+                //Type Fixed Bils ------------------------------------
                 if (!context.TypeFixedBills.Any())
                 {
                     context.TypeFixedBills.AddRange(new List<TypeFixedBill>()
                     {
-                        new TypeFixedBill("Luz"),
-                        new TypeFixedBill("Internet"),
-                        new TypeFixedBill("Celular"),
-                        new TypeFixedBill("Educação"),
-                        new TypeFixedBill("Lazer")
+                        new TypeFixedBill("Luz",1),
+                        new TypeFixedBill("Internet",1),
+                        new TypeFixedBill("Celular",1),
+                        new TypeFixedBill("Educação",1),
+                        new TypeFixedBill("Lazer",1)
 
 
                     });
                     context.SaveChanges();
                 }
 
+
+                //Type Payment ------------------------------------
                 if (!context.TypePayments.Any())
                 {
                     context.TypePayments.AddRange(new List<TypePayment>()
                     {
-                        new TypePayment("Itau Platinun",1 ),
-                        new TypePayment("Itau VISA",2 ),
-                        new TypePayment("Sansung Card",2 ),
-                        new TypePayment("NuBank",1 )
+                        new TypePayment("Itau Platinun",1 ,1),
+                        new TypePayment("Itau VISA",2 ,1),
+                        new TypePayment("Sansung Card",2,1 ),
+                        new TypePayment("NuBank",1 ,1)
 
 
                     });

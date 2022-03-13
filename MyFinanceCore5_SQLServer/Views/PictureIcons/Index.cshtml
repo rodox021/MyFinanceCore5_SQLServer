@@ -7,25 +7,74 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="ml-2">
-    <a asp-action="Create" class="btn btn-outline-primary"><i class="fab fa-plus fa-lg"></i> Novo</a>
+    <a asp-action="Create" class="btn btn-outline-primary"><i class="fa fa-upload fa-lg"> </i> Novo </a>
+    @*@await Html.PartialAsync("_BtncreateNew")*@
 </div>
 <div class=" d-md-flex flex-md-wrap justify-content-start">
     @foreach (var item in Model)
     {
 
-        <div class="card  m-2" >
+        <div class="card  m-2">
             <div class="card-title p-2 text-left bg-success w-100 text-wrap text-center"> @item.Name.ToUpper() </div>
             <div class="card-body text-center">
                 <i class="@item.IconClass fa-4x"></i>
-            
+
             </div>
             <div class="card-footer">
-                <a asp-action="Edit" asp-route-id="@item.Id"class="btn btn-warning" ><i class="fa fa-edit"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="fa fa-circle-info"></i></a>
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa fa-trash-alt"></i></a>
+
+                @*@await Html.PartialAsync("_BtnActions", item.Id)*@ 
             </div>
         </div>
 
 
     }
 </div>
+
+
+<div id="modal" class="modal fade" role="dialog" />
+
+@section Scripts {
+
+    <script type="text/javascript">
+        var url= "PictureIcons/"
+
+        $(function () {
+            $(".details").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id)*/;
+                $("#modal").load(url+"Details/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
+                //alert(id);
+                $("#modal").load(url+"Edit/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".delete").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id);*/
+                $("#modal").load(url+"Delete/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".create").click(function () {
+                $("#modal").load(url+"Create", function () {
+                    $("#modal").modal();
+                })
+            });
+
+        })
+
+
+    </script>
+
+}

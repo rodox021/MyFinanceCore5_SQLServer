@@ -22,15 +22,23 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
 
 
         public TypeFixedBill() { }
-        public TypeFixedBill( string name)
+
+        public TypeFixedBill(string name, int userID)
         {
-           
             Name = name;
+            UserID = userID;
         }
+
 
 
         //Relationship
         public List<FixedBill> FixedBills { get; set; }
+
+
+        //user
+
+        public int UserID { get; set; }
+        public User User { get; set; }
 
     }
 }

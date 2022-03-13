@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MyFinanceCore5_SQLServer.Data;
 using MyFinanceCore5_SQLServer.Services;
 using MyFinanceCore5_SQLServer.Services.Interfaces;
+using MyFinanceCore5_SQLServer.Models.ViewModels;
 
 namespace MyFinanceCore5_SQLServer
 {
@@ -35,6 +36,10 @@ namespace MyFinanceCore5_SQLServer
             services.AddScoped<IPictureIconsService, PictureIconsService>();
             services.AddScoped<ITypeFixedBillsService, TypeFixedBillsService>();
             services.AddScoped<ITypePaymentsService, TypePaymentsService>();
+
+
+            //ViewModdels
+            services.AddScoped<CreateTypePaymenteViewModel>();
         }
 
         

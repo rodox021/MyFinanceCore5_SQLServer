@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.TypePayment>
 
 @{
-    ViewData["Title"] = "Tipo de Conta Fixa";
+    ViewData["Title"] = "Novo Tipo de pagamento";
 }
 
 
@@ -9,18 +9,19 @@
 <hr />
 <div class="container-fluid mb-2">
     <a class="btn btn-outline-primary" asp-action="Create">
-        Novo
+        <i class="fa fa-upload fa-lg mr-2"> </i> Novo
     </a>
+    @*<button class="btn btn-primary create" data-toggle="modal"><i class="fa fa-upload fa-lg mr-2"> </i> Novo</button>*@
 </div>
 <div class="container-fluid">
     <table class="table table-hover">
-        <thead class="thead-dark text-center">
+        <thead class="thead-dark text-center"> 
             <tr>
                 <th>
                     @Html.DisplayNameFor(m => m.FlagCard)
                 </th>
                 <th>
-                   Icone
+                    Icone
                 </th>
                 <th>
                     Ações
@@ -30,28 +31,103 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr class="text-center">
-                <td class="text-uppercase">
-                    @Html.DisplayFor(modelitem => item.FlagCard)
-                </td>
-                <td>
-                    <i class="@Html.DisplayFor(modelitem => item.PictureIcon.IconClass) fa-4x"></i> 
-                </td>
+                <tr class="text-center">
+                    <td class="text-uppercase">
+                        @Html.DisplayFor(modelitem => item.FlagCard)
+                    </td>
+                    <td>
+                        <i class="@Html.DisplayFor(modelitem => item.PictureIcon.IconClass) fa-4x"></i>
+                    </td>
 
-                <td>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
-                        <i class="fa fa-trash-alt"></i>
-                    </a>
-                </td>
-            </tr>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+                       
+                        @*<button
+                type="button"
+                class="btn btn-success details"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                data-id="@item.Id"
+                data-url=" @Url.Action($"details/{item.Id}")"
+                >
+        <i class="fa fa-file-alt"></i>
+        </button>*@
+                        
+
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
 </div>
 
+<div id="modal" class="modal fade" role="dialog" />
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        //$('#myModal').on('shown.bs.modal', function () {
+        //    $('#myInput').trigger('focus')
+        //})
+
+        //$(document).ready(function () {
+        //    $(".details").click(function () {
+        //        var id = $(this).data("id");
+        //        alert("antes do load" + id);
+        //        $("#contModal").load("/TypePayment/Details" + id,
+
+        //            function () {
+        //                $('#myModal').modal("show");
+        //            }
+        //        );
+        //        alert("depois do load" + id);
+        //    });
+        //});
+
+
+        $(function () {
+            $(".details").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id)*/;
+                $("#modal").load("TypePayment/Details/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
+                //alert(id);
+                $("#modal").load("TypePayment/Edit/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".delete").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id);*/
+                $("#modal").load("TypePayment/Delete/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".create").click(function () {
+                $("#modal").load("TypePayment/Create", function () {
+                    $("#modal").modal();
+                })
+            });
+
+        })
+
+
+    </script>
+
+}

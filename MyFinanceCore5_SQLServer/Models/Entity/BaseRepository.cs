@@ -5,6 +5,7 @@ using MyFinanceCore5_SQLServer.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace MyFinanceCore5_SQLServer.Models.Entity
@@ -37,11 +38,25 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         }
 
         //----------------------------GetAll Async-------------------------------
-        public virtual async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
+
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProperties.Aggregate(query, (current, includeProperties) => current.Include(includeProperties));
+            return await query.ToListAsync();
+        }
 
         //----------------------------GetById Async-------------------------------
-        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
-        
+        public virtual async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
+
+        public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            query = includeProperties.Aggregate(query, (current, includeProperties) => current.Include(includeProperties));
+            return await query.FirstOrDefaultAsync(n => n.Id == id);
+        }
+
 
         //----------------------------Update Async-------------------------------
         public async Task UpdateAsync(int id, T entity)

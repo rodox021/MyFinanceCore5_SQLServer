@@ -42,11 +42,74 @@
 </div>
 
 
+
+@*-----------------------------------------------*@
+
+<!--<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+            <p class="modal-title"><i class="fa fa-upload fa-lg mr-2"> </i>@ViewData["Title"]</p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class=" text d-md-flex flex-row">
+
+                <div class="col-md-12">
+                    <div>
+
+                        <div class=" ">
+                            <div class="align-items-center">
+                                <div class="d-flex justify-content-center align-items-center h-100">
+                                    <i id="img-icone"> </i>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div>
+                                    <form asp-action="Edit">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+
+                                            <label asp-for="Name" class="control-label"></label>
+                                            <div>
+
+                                                <input asp-for="Name" class="form-control" />
+                                            </div>
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="IconClass" class="control-label"></label>
+                                            <input asp-for="IconClass" class="form-control" />
+                                            <span asp-validation-for="IconClass" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" value="Create" class="btn btn-success"><i class="fas fa-refresh"></i> Salvar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="modal-footer bg-warning">-->
+            @*<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-arrow-left"></i>Voltar</button>*@
+        <!--</div>
+    </div>
+</div>-->
+
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
         <script>
             $(document).ready(function () {
-                $("#img-icone").addClass($("#IconClass").val()+" fa-4x")
+                $("#img-icone").addClass($("#IconClass").val() + " fa-4x")
 
             })
 

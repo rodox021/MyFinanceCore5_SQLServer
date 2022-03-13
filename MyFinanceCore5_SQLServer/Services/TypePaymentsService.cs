@@ -17,12 +17,24 @@ namespace MyFinanceCore5_SQLServer.Services
             _context = context;
         }
 
-        public override async Task<IEnumerable<TypePayment>> GetAllAsync()
+
+        public async Task<IEnumerable<TypePayment>> GetAllWthPictureAsync()
         {
-           
-            var list = await _context.TypePayments.Include(obj => obj.PictureIcon).ToListAsync();
+            var list = await _context.TypePayments
+                .Include(obj => obj.PictureIcon)
+                .Include(obj => obj.User)
+                .ToListAsync();
             return await Task.FromResult<List<TypePayment>>(list);
         }
+
+        public async Task<TypePayment> GetByIdWithPictureAsync(int id)
+        {
+            return await _context.TypePayments
+                .Include(p => p.PictureIcon)
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(n => n.Id == id);
+        }
+
     }
 }
 

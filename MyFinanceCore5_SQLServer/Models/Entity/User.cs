@@ -36,11 +36,12 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         private DateTime? CreateAt;
 
 
-        public DateTime? MyProperty
+        public DateTime? CreatAt
         {
             get { return CreateAt; }
             set { CreateAt = value == null ? DateTime.Now : value; }
         }
+
 
         public DateTime? UpdateAt { get; set; }
         public DateTime? DeletedAt { get; set; }
@@ -64,6 +65,21 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         //Shop
 
         public List<Shop> Shops { get; set; }
+
+        //Type Fixed bills - tipo de conta fixa
+
+        public List<TypeFixedBill> TypeFixedBills { get; set; }
+
+
+        //Type Input - tipo de entrada
+
+        public List<TypeInput> TypeInputs { get; set; }
+
+
+        //Type Payment - tipo de entrada
+
+        public List<TypePayment> TypePayments { get; set; }
+
 
 
 

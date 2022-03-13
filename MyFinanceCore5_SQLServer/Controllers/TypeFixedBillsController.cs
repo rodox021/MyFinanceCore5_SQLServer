@@ -23,7 +23,7 @@ namespace MyFinanceCore5_SQLServer.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var data = await _typeFixedBillsService.GetAllAsync();
+            var data = await _typeFixedBillsService.GetAllAsync(u => u.User);
 
             return View(data);
         } 
@@ -38,12 +38,12 @@ namespace MyFinanceCore5_SQLServer.Controllers
         {
             if (id == null)
             {
-                RedirectToAction(nameof(Error), new { msg = "Id é nulo !" });
+                return RedirectToAction(nameof(Error), new { msg = "Id é nulo !" });
             }
-            var obj = await _typeFixedBillsService.GetByIdAsync(id.Value);
+            var obj = await _typeFixedBillsService.GetByIdAsync(id.Value, u => u.User);
             if (obj == null)
             {
-                return RedirectToAction(nameof(Error), new { msg = "Não foi encontrado nenhum tipo de pagamento" });
+                return RedirectToAction(nameof(Error), new { msg = "Não foi encontrado nenhum tipo de conta fixa" });
             }
 
             return View(obj);

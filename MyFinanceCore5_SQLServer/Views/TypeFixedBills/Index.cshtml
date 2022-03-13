@@ -9,8 +9,9 @@
 <hr />
 <div class="container-fluid mb-2">
     <a class="btn btn-outline-primary" asp-action="Create">
-        Novo
+        <i class="fa fa-upload fa-lg"> </i> Novo
     </a>
+   
 </div>
 <div class="container-fluid">
     <table class="table table-hover">
@@ -30,23 +31,86 @@
             {
                 <tr class="text-center">
                     <td>
-                      @item.Name.ToUpper()
+                        @item.Name.ToUpper()
                     </td>
 
                     <td>
                         <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
-                            <i class="fa fa-trash-alt"></i>
-                        </a>
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                <i class="fa fa-trash-alt"></i>
+                            </a>
+
+                        @*@await Html.PartialAsync("_BtnActions", item.Id)*@
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+<div id="modal" class="modal fade" role="dialog" />
 
+@section Scripts {
+
+    <script type="text/javascript">
+
+        //$('#myModal').on('shown.bs.modal', function () {
+        //    $('#myInput').trigger('focus')
+        //})
+
+        //$(document).ready(function () {
+        //    $(".details").click(function () {
+        //        var id = $(this).data("id");
+        //        alert("antes do load" + id);
+        //        $("#contModal").load("/TypePayment/Details" + id,
+
+        //            function () {
+        //                $('#myModal').modal("show");
+        //            }
+        //        );
+        //        alert("depois do load" + id);
+        //    });
+        //});
+
+
+        $(function () {
+            $(".details").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id)*/;
+                $("#modal").load("TypeFixedBills/Details/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".edit").click(function () {
+                var id = $(this).attr("data-id");
+                //alert(id);
+                $("#modal").load("TypeFixedBills/Edit/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".delete").click(function () {
+                var id = $(this).attr("data-id");
+                /*alert(id);*/
+                $("#modal").load("TypeFixedBills/Delete/" + id, function () {
+                    $("#modal").modal();
+                })
+            });
+
+            $(".create").click(function () {
+                $("#modal").load("TypeFixedBills/Create", function () {
+                    $("#modal").modal();
+                })
+            });
+
+        })
+
+
+    </script>
+
+}

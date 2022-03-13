@@ -21,11 +21,12 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         {
         }
 
-        public TypePayment( string flagCard, int pictureIconId)
+        public TypePayment( string flagCard, int pictureIconId, int UserId)
         {
            
             FlagCard = flagCard;
             PictureIconId = pictureIconId;
+            UserID = UserId;
         }
 
 
@@ -44,6 +45,11 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
 
         //Payment
         public List<Payment> Payments { get; set; }
+
+        //user
+
+        public int UserID { get; set; }
+        public User User { get; set; }
 
     }
 }
