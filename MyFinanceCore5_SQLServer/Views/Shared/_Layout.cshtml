@@ -30,10 +30,18 @@
                         <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuração</a>
+                            <a class="nav-link dropdown-toggle text-dark" 
+                               data-toggle="dropdown" 
+                               role="button" 
+                               aria-haspopup="true" 
+                               aria-expanded="false">
+                               <i class="fas fa-cogs"></i>
+                            Configuração
+                            </a>
                             <div class="dropdown-menu">
                                 <a asp-controller="TypeFixedBills" asp-action="Index" class="dropdown-item">Tipo de Conta Fixa</a>
                                 <a asp-controller="TypePayment" asp-action="Index" class="dropdown-item">Tipo de Pagamento</a>
+                                <a asp-controller="TypeInput" asp-action="Index" class="dropdown-item">Tipo de Entradas</a>
                                 <a asp-controller="PictureIcons" asp-action="Index" class="dropdown-item">Icon</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Something else here</a>

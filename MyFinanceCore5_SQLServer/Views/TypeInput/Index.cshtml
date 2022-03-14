@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.TypeInput>
+
+@{
+    ViewData["Title"] = "Tipos de Entrada";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="container-fluid mb-2">
+    <a class="btn btn-outline-primary" asp-action="Create">
+        <i class="fa fa-upload fa-lg"> </i> Novo
+    </a>
+
+</div>
+<div class="container-fluid">
+    <table class="table table-hover">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.Name)
+                </th>
+
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center" id="@item.Id">
+                    <td>
+                        @item.Name.ToUpper()
+                    </td>
+
+                    <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        @*<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>*@
+                        <a class="btn btn-outline-danger" onclick="deleteTypeInput(@item.Id)">
+                            <i class="fa fa-trash-alt"></i>
+                        </a>
+
+                        @*@await Html.PartialAsync("_BtnActions", item.Id)*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

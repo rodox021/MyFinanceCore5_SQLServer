@@ -117,6 +117,22 @@ namespace MyFinanceCore5_SQLServer.Data
                     });
                     context.SaveChanges();
                 }
+
+                //Type Inputs
+
+                if (!context.TypeInputs.Any())
+                {
+                    context.TypeInputs.AddRange(new List<TypeInput>()
+                    {
+                        new TypeInput("Salário fixo",1),
+                        new TypeInput("Extra",1),
+                        new TypeInput("Pgto Juliana",1 ),
+                        new TypeInput("Venda de Produto",1)
+
+
+                    });
+                    context.SaveChanges();
+                }
             }
         }
     }

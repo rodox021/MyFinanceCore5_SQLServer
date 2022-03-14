@@ -11,14 +11,27 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
     {
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage ="Campo {0} obrigatório")]
+        [Display(Name ="Nome da Entrada")]
         public string Name { get; set; }
 
         //TypeInput
         public List<Input> Inputs { get; set; }
 
+        public TypeInput()
+        {
+        }
+
+        public TypeInput(string name, int userID)
+        {
+            Name = name;
+            UserID = userID;
+        }
+
+
 
         //Relationship
-
         public int UserID { get; set; }
         public User User { get; set; }
     }

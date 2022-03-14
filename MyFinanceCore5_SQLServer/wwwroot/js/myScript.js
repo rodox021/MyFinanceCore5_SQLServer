@@ -1,29 +1,35 @@
-﻿function teste(id) {
-    var op = confirm("Sure?" + id)
-    alert(op)
-}
+﻿
 
-function deleteTypePayment(id) {
+function deleteTypeInput(id) {
 
     var op = confirm(
-        "Tem ceretza que deseja excluir esse tipo de pagamento? " + id
+        "Tem ceretza que deseja excluir esse tipo de pagamento? "
     )
 
     if (op) {
-       alert(op)
 
-        $.ajax({
-            type: "POST",
-            url: "/PictureIcons/Delete",
-            data: { "id": id },
-            success: function () {
-                alert("ok")
-            },
-            error: function (res) {
-                alert(res.responseText);
-            }
-            
-        })
+        $.ajax(
+            {
+                url: 'TypeInput/DeleteJson',
+                method: 'POST',
+                data: { "id": id },
+                async: true,
+                success: function (data) {
+                    if (data) {
+                        document.getElementById(id).remove();
+                        alert("Tipo de entarda excluido com sucesso!!")
+                    } else {
+                        alert(data)
+                    }
+                }
+            });
+    //    $.ajax(
+    //            {
+    //                url: 'TypeInput/Delete',
+    //                method: 'POST',
+    //                data: { "id": id },
+    //                async: true,
+    //            });
     }
 
 }
