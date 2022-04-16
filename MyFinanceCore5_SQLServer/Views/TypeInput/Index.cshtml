@@ -4,16 +4,21 @@
     ViewData["Title"] = "Tipos de Entrada";
 }
 
+@section Styles{ 
+    <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+
+}
+
 <h2>@ViewData["Title"]</h2>
 <hr />
-<div class="container-fluid mb-2">
+<div class="container-fluid mb-4 d-flex justify-content-end">
     <a class="btn btn-outline-primary" asp-action="Create">
         <i class="fa fa-upload fa-lg"> </i> Novo
     </a>
 
 </div>
 <div class="container-fluid">
-    <table class="table table-hover">
+    <table class="table table-hover" id="tbTypeInput">
         <thead class="thead-dark text-center">
             <tr>
                 <th>
@@ -54,3 +59,19 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts{ 
+
+
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tbTypeInput').dataTable()
+        })
+    </script>
+
+}

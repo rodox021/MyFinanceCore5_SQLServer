@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.TypePayment>
 
 @{
-    ViewData["Title"] = "Novo Tipo de pagamento";
+    ViewData["Title"] = "Tipo de pagamento";
 }
+@section Styles {
 
+    <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+}
 
 <h2>@ViewData["Title"]</h2>
 <hr />
-<div class="container-fluid mb-2">
+<div class="container-fluid mb-4 d-flex justify-content-end">
     <a class="btn btn-outline-primary" asp-action="Create">
         <i class="fa fa-upload fa-lg mr-2"> </i> Novo
     </a>
     @*<button class="btn btn-primary create" data-toggle="modal"><i class="fa fa-upload fa-lg mr-2"> </i> Novo</button>*@
 </div>
 <div class="container-fluid">
-    <table class="table table-hover">
+    <table class="table table-hover" id="tbTypePayment">
         <thead class="thead-dark text-center"> 
             <tr>
                 <th>
@@ -73,7 +76,13 @@
 
 @section Scripts {
 
+        <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tbTypePayment').dataTable();
+        })
 
         //$('#myModal').on('shown.bs.modal', function () {
         //    $('#myInput').trigger('focus')

@@ -5,8 +5,10 @@
 }
 
 @section styles {
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.3.7/css/autoFill.dataTables.min.css" />
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/autofill/2.3.7/css/autoFill.dataTables.min.css" />*@
+<link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+
 }
 <h2>@ViewData["Title"]</h2>
 <hr />
@@ -60,8 +62,13 @@
 @*<div id="modal" class="modal fade" role="dialog" />*@
 
 @section Scripts {
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/autofill/2.3.7/js/dataTables.autoFill.min.js"></script>
+    @*<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/autofill/2.3.7/js/dataTables.autoFill.min.js"></script>*@
+
+<script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+<script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
+
     <script type="text/javascript">
 
         $(document).ready(function () {
