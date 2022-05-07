@@ -11,5 +11,6 @@ namespace MyFinanceCore5_SQLServer.Services.Interfaces
     {
         Task<IEnumerable<TypePayment>> GetAllWthPictureAsync();
         Task<TypePayment> GetByIdWithPictureAsync(int id);
+        
     }
 }

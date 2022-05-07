@@ -9,9 +9,14 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
 {
     public class Payment:IBaseEntity
     {
+        public Payment()
+        {
+        }
+
         [Key]
         public int Id { get; set; }
 
+        [Display(Name ="Nome")]
         public string Name { get; set; }
         public DateTime DueDate { get; set; }
 
@@ -26,11 +31,20 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
 
 
         public int TypePaymentId { get; set; }
+
+        [Display(Name = "Bandeira")]
         public TypePayment TypePayment { get; set; }
 
         //shop
 
         public List<Shop> Shops { get; set; }
 
+        public Payment(string name,  int userId, int typePaymentId)
+        {
+            Name = name;
+           
+            UserId = userId;
+            TypePaymentId = typePaymentId;
+        }
     }
 }

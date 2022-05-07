@@ -1,0 +1,115 @@
+﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.Payment>
+
+@{
+    ViewData["Title"] = "Método de Pagamento";
+}
+
+@section Styles{
+    <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+
+}
+
+<h2>@ViewData["Title"]</h2>
+@*@Html.Partial("_ButtonNew")*@
+
+<partial name="_ButtonNew">
+<div class="container-fluid">
+    <table class="table table-hover " id="tbTypeInput">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.TypePayment)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(m => m.TypePayment.PictureIcon.IconClass)
+                </th>*@
+
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="text-center" id="@item.Id">
+                <td>
+                    @item.Name.ToUpper()
+                </td>
+                @*<td>
+                    @item.TypePayment.FlagCard
+                </td>*@
+                <td>
+                   
+                    <i class="fa @item.TypePayment.PictureIcon.IconClass fa-2x"></i>
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    @*<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
+                <i class="fa fa-trash-alt"></i>
+            </a>*@
+                    <a class="btn btn-outline-danger" onclick="deletePayment(@item.Id)">
+                        <i class="fa fa-trash-alt"></i>
+                    </a>
+
+                    @*@await Html.PartialAsync("_BtnActions", item.Id)*@
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+
+
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tbTypeInput').dataTable()
+        })
+
+
+        function deletePayment(id) {
+
+            var op = confirm(
+                "Tem ceretza que deseja excluir esse método de pagamento? "
+            )
+
+            if (op) {
+
+                $.ajax(
+                    {
+                        url: 'Payment/Delete',
+                        method: 'POST',
+                        data: { "id": id },
+                        async: true,
+                        success: function (data) {
+                            if (data) {
+                                document.getElementById(id).remove();
+                                alert("Método de pagamento excluido com sucesso!!")
+                            } else {
+                                alert(data)
+                            }
+                        }
+                    });
+            }
+
+        }
+  
+    </script>
+
+}

@@ -36,5 +36,17 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         //Installment
         public List<InstallmentBuy> InstallmentBuys { get; set; }
 
+        public Shop() {}
+
+        public Shop(string store, DateTime datePurchase, string product, double price, int cardUserId, int paymentId, int userId)
+        {
+            Store = store;
+            DatePurchase = datePurchase;
+            Product = product;
+            Price = price;
+            CardUserId = cardUserId;
+            PaymentId = paymentId;
+            UserId = userId;
+        }
     }
 }

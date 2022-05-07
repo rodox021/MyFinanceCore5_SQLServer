@@ -1,0 +1,43 @@
+﻿@model MyFinanceCore5_SQLServer.Models.ViewModels.CreatePaymentViewModel
+
+@{
+    ViewData["Title"] = "Novo Método de Pagamento";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class=" text d-md-flex flex-row">
+
+    <div class="col-md-10">
+        <div>
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserId" value="1" />
+                <div class="form-group">
+
+                    <label asp-for="Name" class="control-label"></label>
+                    <div>
+
+                        <input asp-for="Name" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TypepaymentId" class="control-label"></label>
+                    <select class="form-control"
+                            asp-for="TypepaymentId" asp-items="ViewBag.TypePayments">
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" value="Create" class="btn btn-success "><i class="fas fa-save"></i> Salvar</button>
+                    <a class="btn btn-outline-info" onclick="window.history.back()"><i class="fa fa-arrow-left"></i> Voltar</a>
+                    @*<a class="btn btn-outline-info" asp-action="index"><i class="fa fa-arrow-left"></i> Voltar</a>*@
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

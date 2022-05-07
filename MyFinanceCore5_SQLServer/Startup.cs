@@ -37,6 +37,7 @@ namespace MyFinanceCore5_SQLServer
             services.AddScoped<ITypeFixedBillsService, TypeFixedBillsService>();
             services.AddScoped<ITypePaymentsService, TypePaymentsService>();
             services.AddScoped<ITypeInputsService, TypeInputsService>();
+            services.AddScoped<IPaymentsService, PaymentsService>();
 
 
             //ViewModdels

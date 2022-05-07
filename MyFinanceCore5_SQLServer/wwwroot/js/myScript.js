@@ -17,19 +17,14 @@ function deleteTypeInput(id) {
                 success: function (data) {
                     if (data) {
                         document.getElementById(id).remove();
-                        alert("Tipo de entarda excluido com sucesso!!")
+                        alert("Tipo de entrada excluido com sucesso!!")
                     } else {
                         alert(data)
                     }
                 }
             });
-    //    $.ajax(
-    //            {
-    //                url: 'TypeInput/Delete',
-    //                method: 'POST',
-    //                data: { "id": id },
-    //                async: true,
-    //            });
     }
-
 }
+    //----------------------------------------------------
+
+   

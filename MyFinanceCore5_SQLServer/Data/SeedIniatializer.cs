@@ -108,13 +108,25 @@ namespace MyFinanceCore5_SQLServer.Data
                 {
                     context.TypePayments.AddRange(new List<TypePayment>()
                     {
-                        new TypePayment("Itau Platinun",1 ,1),
-                        new TypePayment("Itau VISA",2 ,1),
-                        new TypePayment("Sansung Card",2,1 ),
-                        new TypePayment("NuBank",1 ,1)
+                        new TypePayment("Mastercard",3 ,1),
+                        new TypePayment("VISA",2 ,1),
+                         new TypePayment("Débito",4 ,1),
 
 
                     });
+                    context.SaveChanges();
+                }
+
+                // payment
+
+                if (!context.Payments.Any())
+                {
+                    context.Payments.AddRange(new List<Payment>()
+                    {
+                        new Payment("Itau Platinum", 1, 3),
+                        new Payment("Itau Internacional", 1, 2)
+                    });
+
                     context.SaveChanges();
                 }
 
@@ -133,6 +145,29 @@ namespace MyFinanceCore5_SQLServer.Data
                     });
                     context.SaveChanges();
                 }
+
+                // Card User
+
+                if (!context.CardUsers.Any())
+                {
+                    context.CardUsers.AddRange(new List<CardUser>()
+                    {
+                        new CardUser("Rodolfo", 1),
+                        new CardUser("Rodolfo", 1)
+                    });
+
+                    context.SaveChanges();
+                }
+
+
+                //SHops
+                //if (!context.Shops.Any())
+                //{
+                //    context.Shops.AddRange(new List<Shop>()
+                //    {
+                //        new Shop("Americanas", new DateTime(2022,01,01),"Tv 32 polegadas LG", 999.99,3,
+                //    });
+                //}
             }
         }
     }
