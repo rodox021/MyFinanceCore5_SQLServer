@@ -1,0 +1,105 @@
+﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.Shop>
+
+@{
+    ViewData["Title"] = "Compras";
+}
+
+
+@section Styles{
+    <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<div class="container-fluid mb-4 d-flex justify-content-end">
+    <a class="btn btn-outline-primary" asp-action="Create">
+        <i class="fa fa-upload fa-lg"> </i> Novo
+    </a>
+
+</div>
+<div class="container-fluid">
+    Total de compras: @Model.Select(m => m.Price).Sum()
+    <table class="table table-hover" id="table">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.DatePurchase)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Store)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Product)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Payment.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.CardUser.Name)
+                </th>
+
+                <th>
+                    Ações
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="text-center" id="@item.Id">
+                <td>
+                    @item.DatePurchase.ToShortDateString()
+                </td>
+                <td>
+                    @item.Store.ToUpper()
+                </td>
+                <td>
+                    @item.Product
+                </td>
+                <td>
+                    <i class="@item.Payment.TypePayment.PictureIcon.IconClass"></i>
+                </td>
+                <td>
+                    @item.Price.ToString("C2")
+                </td>
+                <td>
+                    @item.CardUser.Name 
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" onclick="deleteTypeInput(@item.Id)">
+                        <i class="fa fa-trash-alt"></i>
+                    </a>
+
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+
+
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#table').dataTable()
+        })
+    </script>
+
+}
