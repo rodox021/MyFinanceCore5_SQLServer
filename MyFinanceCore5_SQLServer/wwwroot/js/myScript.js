@@ -1,30 +1,31 @@
-﻿
+﻿{
 
-function deleteTypeInput(id) {
+    function deleteTypeInput(id) {
 
-    var op = confirm(
-        "Tem ceretza que deseja excluir esse tipo de pagamento? "
-    )
+        var op = confirm(
+            "Tem ceretza que deseja excluir esse tipo de pagamento? "
+        )
 
-    if (op) {
+        if (op) {
 
-        $.ajax(
-            {
-                url: 'TypeInput/DeleteJson',
-                method: 'POST',
-                data: { "id": id },
-                async: true,
-                success: function (data) {
-                    if (data) {
-                        document.getElementById(id).remove();
-                        alert("Tipo de entrada excluido com sucesso!!")
-                    } else {
-                        alert(data)
+            $.ajax(
+                {
+                    url: 'TypeInput/DeleteJson',
+                    method: 'POST',
+                    data: { "id": id },
+                    async: true,
+                    success: function (data) {
+                        if (data) {
+                            document.getElementById(id).remove();
+                            alert("Tipo de entrada excluido com sucesso!!")
+                        } else {
+                            alert(data)
+                        }
                     }
-                }
-            });
+                });
+        }
     }
-}
     //----------------------------------------------------
-
+    
+}
    

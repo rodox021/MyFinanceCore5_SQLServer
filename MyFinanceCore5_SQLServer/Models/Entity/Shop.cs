@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace MyFinanceCore5_SQLServer.Models.Entity
 {
-    public class Shop:IBaseEntity
+    public class Shop : IBaseEntity
     {
         [Key]
         public int Id { get; set; }
-
 
         public string Store { get; set; }
         public DateTime DatePurchase { get; set; }
@@ -36,7 +35,7 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
         //Installment
         public List<InstallmentBuy> InstallmentBuys { get; set; }
 
-        public Shop() {}
+        public Shop() { }
 
         public Shop(string store, DateTime datePurchase, string product, double price, int cardUserId, int paymentId, int userId)
         {

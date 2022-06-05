@@ -15,6 +15,9 @@ namespace MyFinanceCore5_SQLServer.Models.Entity
 
         [Key]
         public int Id { get; set; }
+
+        [Display(Name = "Nome do Dependente")]
+        [Required(ErrorMessage = "Campo {0} obrigatório")]
         public string Name { get; set; }
 
         //Relationship

@@ -153,7 +153,7 @@ namespace MyFinanceCore5_SQLServer.Data
                     context.CardUsers.AddRange(new List<CardUser>()
                     {
                         new CardUser("Rodolfo", 1),
-                        new CardUser("Rodolfo", 1)
+                        new CardUser("Juliana", 1)
                     });
 
                     context.SaveChanges();
@@ -161,13 +161,16 @@ namespace MyFinanceCore5_SQLServer.Data
 
 
                 //SHops
-                //if (!context.Shops.Any())
-                //{
-                //    context.Shops.AddRange(new List<Shop>()
-                //    {
-                //        new Shop("Americanas", new DateTime(2022,01,01),"Tv 32 polegadas LG", 999.99,3,
-                //    });
-                //}
+                if (!context.Shops.Any())
+                {
+                    context.Shops.AddRange(new List<Shop>()
+                    {
+                        new Shop("Americanas", new DateTime(2022,01,01),"Tv 32 polegadas LG", 999.99,3,1,1),
+                        new Shop("Sansung Shop", new DateTime(2022,05,08),"Tablet S7 Fe", 3750.00,3,1,1),
+                        new Shop("Predileto", new DateTime(2022,05,08),"Almoço", 14.00,3,1,1),
+                    }) ;
+                    context.SaveChanges();
+                }
             }
         }
     }

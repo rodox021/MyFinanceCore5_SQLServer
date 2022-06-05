@@ -1,0 +1,111 @@
+﻿@model IEnumerable<MyFinanceCore5_SQLServer.Models.Entity.CardUser>
+
+@{
+    ViewData["Title"] = "Dependentes";
+
+    Boolean flag = false;
+
+   
+}
+
+
+    @section Styles{
+        <link href="~/lib/datatables.net-bs5/dataTables.bootstrap5.css" rel="stylesheet" />
+
+    }
+
+    <h2>@ViewData["Title"]<p>@flag</p></h2>
+    <hr />
+    <div class="container-fluid mb-4 d-flex justify-content-end">
+        <a class="btn btn-outline-primary" asp-action="Create">
+            <i class="fa fa-upload fa-lg"> </i> Novo
+        </a>
+
+    </div>
+    <div class="container-fluid">
+        <table class="table table-hover" id="tbCardUser">
+            <thead class="thead-dark text-center">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </th>
+
+                    <th>
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center" id="@item.Id">
+                        <td>
+                            @item.Name.ToUpper()
+                        </td>
+
+                        <td>
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            @*<a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">
+                                    <i class="fa fa-trash-alt"></i>
+                                </a>*@
+                            <a class="btn btn-outline-danger" onclick="deleteBase(@item.Id, 'CardUser')">
+                                <i class="fa fa-trash-alt"></i>
+                            </a>
+                            
+
+                            @*@await Html.PartialAsync("_BtnActions", item.Id)*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @section Scripts
+{
+
+
+        <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+        <script src="~/lib/datatables.net-bs5/dataTables.bootstrap5.js"></script>
+
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#tbCardUser').dataTable()
+        })
+
+        function deleteBase(id, controller) {
+            var op = confirm(
+                "Tem ceretza que deseja excluir esse depedente?"
+            )
+
+            if (op) {
+
+                $.ajax(
+                    {
+                        url: controller + '/DeleteJson',
+                        method: 'POST',
+                        data: { "id": id },
+                        async: true,
+                        success: function (data) {
+                            if (data) {
+                                document.getElementById(id).remove();
+                                alert("Dependente excluido com sucesso!!")
+                            } else {
+                                alert(data)
+                            }
+                        }
+                    });
+            }
+        }
+
+        
+        </script>
+
+    }
